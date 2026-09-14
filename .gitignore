@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+instance/
+uploads/*
+backups/*
+.env
+agenda.sqlite3
+.venv/
