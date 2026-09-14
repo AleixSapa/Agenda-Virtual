@@ -34,14 +34,14 @@
     <div class="brand">📚 Agenda Virtual</div>
     <nav aria-label="Navegació principal">
       <a class="active" href="/">Inici</a>
-      <a href="/calendari">Calendari</a>
+      <a href="/calendar">Calendari</a>
       <a href="/homework">Deures</a>
       <a href="/exams">Exàmens</a>
       <a href="/events">Esdeveniments</a>
-      <a href="/assignatures">Assignatures</a>
-      <a href="/horari">Horari</a>
-      <a href="/paperera">Paperera</a>
-      <a href="/configuracio">Configuració</a>
+      <a href="/subjects">Assignatures</a>
+      <a href="/timetable">Horari</a>
+      <a href="/trash">Paperera</a>
+      <a href="/settings">Configuració</a>
     </nav>
     <a class="logout" href="/logout">Sortir</a>
   </div>
@@ -52,18 +52,9 @@
   <p class="subtitle">Aquí tens un resum de la teva agenda escolar.</p>
 
   <section class="grid" aria-label="Resum">
-    <div class="card">
-      <div class="muted">Pendents</div>
-      <div class="stat">{{ pending|default(0) }}</div>
-    </div>
-    <div class="card">
-      <div class="muted">Exàmens propers</div>
-      <div class="stat">{{ exams|default(0) }}</div>
-    </div>
-    <div class="card">
-      <div class="muted">Deures acabats</div>
-      <div class="stat">{{ done|default(0) }}</div>
-    </div>
+    <div class="card"><div class="muted">Pendents</div><div class="stat">{{ pending|default(0) }}</div></div>
+    <div class="card"><div class="muted">Exàmens propers</div><div class="stat">{{ exams|default(0) }}</div></div>
+    <div class="card"><div class="muted">Deures acabats</div><div class="stat">{{ done|default(0) }}</div></div>
   </section>
 
   <section class="card" style="margin-top:16px">
@@ -74,17 +65,12 @@
         <div>
           <strong>{{ item.title }}</strong>
           {% if item.subject %}<span class="badge">{{ item.subject }}</span>{% endif %}
-          <div class="muted small">
-            {{ item.event_date }}{% if item.event_time %} · {{ item.event_time }}{% endif %}
-            {% if item.place %} · {{ item.place }}{% endif %}
-          </div>
+          <div class="muted small">{{ item.event_date }}{% if item.event_time %} · {{ item.event_time }}{% endif %}{% if item.place %} · {{ item.place }}{% endif %}</div>
         </div>
         <a class="btn alt" href="{{ url_for('edit_item', item_id=item.id) }}">Obrir</a>
       </div>
       {% endfor %}
-    {% else %}
-      <p class="muted">No tens res proper. 🎉</p>
-    {% endif %}
+    {% else %}<p class="muted">No tens res proper. 🎉</p>{% endif %}
   </section>
 
   <section class="card" style="margin-top:16px">
@@ -93,7 +79,7 @@
       <a class="btn" href="{{ url_for('new_item', kind='homework') }}">＋ Nou deure</a>
       <a class="btn" href="{{ url_for('new_item', kind='exam') }}">＋ Nou examen</a>
       <a class="btn" href="{{ url_for('new_item', kind='event') }}">＋ Nou esdeveniment</a>
-      <a class="btn alt" href="/calendari">📅 Veure calendari</a>
+      <a class="btn alt" href="/calendar">📅 Veure calendari</a>
     </div>
   </section>
 </main>
